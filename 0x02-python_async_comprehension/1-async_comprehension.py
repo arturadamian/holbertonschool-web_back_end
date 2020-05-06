@@ -13,7 +13,4 @@ async def async_comprehension():
         using an async comprehensing over async_generator
         and return them
     """
-    result = []
-    async for i in async_generator():
-        result.append(i)
-    return result
+    return [i async for i in async_generator()]
