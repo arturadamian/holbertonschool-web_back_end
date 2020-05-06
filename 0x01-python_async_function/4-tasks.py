@@ -13,5 +13,5 @@ async def task_wait_n(n: int, max_delay: int) -> List[float]:
     """return the list of all the delays in ascending order"""
     list_of_delays: List[float] = []
     for _ in range(n):
-        bisect.insort(list_of_delays, await task_wait_random(max_delay))
-    return list_of_delays
+        list_of_delays.append(task_wait_random(max_delay))
+    return [await delay for delay in asyncio.as_completed(list_of_delays)]
