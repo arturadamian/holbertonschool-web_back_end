@@ -14,7 +14,6 @@ class FIFOCache(BaseCaching):
     def _pop(self):
         """ pops out of the list
         """
-        print(self.data)
         self.next_out += 1
         key = self.data[self.next_out]
         del self.data[self.next_out], self.cache_data[key]
