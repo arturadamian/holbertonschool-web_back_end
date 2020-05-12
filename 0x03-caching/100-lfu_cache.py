@@ -4,6 +4,7 @@
 from base_caching import BaseCaching
 from collections import OrderedDict
 
+
 class LFUCache(BaseCaching):
     """ inherits from BaseCaching and is a caching system
     """
@@ -22,7 +23,7 @@ class LFUCache(BaseCaching):
                 self.lfu_cache[key] = 1
             return val
 
-    def put (self, key, item):
+    def put(self, key, item):
         if key in self.lru_cache:
             del self.lru_cache[key]
         self.lru_cache[key] = item
@@ -41,6 +42,4 @@ class LFUCache(BaseCaching):
             print("DISCARD:", the_actual_key)
             self.lru_cache.popitem(last=False)
             del self.lfu_cache[the_actual_key]
-        self.cache_data = dict(self.lru_cache)
-        # print( self.lfu_cache)
-       
+        self.cache_data = dict(self.lru_cache)  # print( self.lfu_cache)
