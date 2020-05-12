@@ -40,13 +40,13 @@ class LFUCache(BaseCaching):
             # print(lfu_keys)
             the_key = list(self.lru_cache.items())[0][0]
             if the_key in lfu_keys:
-                the_actual_key = the_key
-                print("DISCARD:", the_actual_key)
+                print("DISCARD:", the_key)
                 self.lru_cache.popitem(last=False)
+                del self.lfu_cache[the_key]
             else:
-                the_actual_key = min(self.lfu_cache, key=self.lfu_cache.get)
+                min_key = min(self.lfu_cache, key=self.lfu_cache.get)
                 # print(the_actual_key)
-                print("DISCARD:", the_actual_key)
-                self.lru_cache.popitem(the_actual_key)
-            del self.lfu_cache[the_actual_key]
+                print("DISCARD:", min_key)
+                self.lru_cache.popitem(min_key)
+                del self.lfu_cache[min_key]
         self.cache_data = dict(self.lru_cache)  # print( self.lfu_cache)
