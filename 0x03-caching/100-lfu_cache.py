@@ -14,6 +14,8 @@ class LFUCache(BaseCaching):
         self.lfu_cache = {}
 
     def get(self, key):
+        """ gets an item from the cache
+        """
         if key in self.lru_cache:
             val = self.lru_cache[key]
             self.lru_cache.move_to_end(key)
@@ -24,6 +26,7 @@ class LFUCache(BaseCaching):
             return val
 
     def put(self, key, item):
+        """ puts an item to the cache"""
         if key in self.lru_cache:
             del self.lru_cache[key]
         self.lru_cache[key] = item
