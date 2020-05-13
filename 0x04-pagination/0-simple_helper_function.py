@@ -6,6 +6,6 @@
 
 def index_range(page, page_size):
     if page and page_size:
-        start_index = (page - 1) * page_size if page > 1 else 0
+        start_index = (page - 1) * page_size
         end_index = page_size * page
     return (start_index, end_index)
