@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """ Simple helper function
 """
-from typing import List, Dict
+from typing import List, Dict, Any
 import csv
 import math
 
@@ -40,7 +40,7 @@ class Server:
         result = self.dataset()
         return result[start:end]
 
-    def get_hyper(self, page: int = 1, page_size: int = 10) -> Dict:
+    def get_hyper(self, page: int = 1, page_size: int = 10) -> Dict[str, Any]:
         """Gets an object
         """
         assert type(page) == int and page > 0
