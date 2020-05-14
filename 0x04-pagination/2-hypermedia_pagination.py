@@ -40,7 +40,7 @@ class Server:
         result = self.dataset()
         return result[start:end]
 
-    def get_hyper(self, page: int = 1, page_size: int = 10) -> Dict[str, str]:
+    def get_hyper(self, page: int = 1, page_size: int = 10) -> Dict:
         """Gets an object
         """
         assert type(page) == int and page > 0
