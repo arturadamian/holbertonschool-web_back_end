@@ -46,10 +46,11 @@ class Server:
         assert type(page) == int and page > 0
         assert type(page_size) == int and page_size > 0
 
-        return {'page_size': page_size,
+        start, _ = index_range(page, page_size)
+        return {'page_size': page_size if start < len(self.dataset()) else 0,
                 'page': page,
                 'data': self.get_page(page, page_size),
-                'next_page': page + 1,
+                'next_page': page + 1 if start < len(self.dataset()) else None,
                 'prev_page': page - 1 if page > 1 else None,
-                'total_pages': round(len(self.dataset()) / page_size)
+                'total_pages': math.ceil(len(self.dataset()) / page_size)
                 }
