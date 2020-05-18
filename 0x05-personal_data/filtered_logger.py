@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+"""Personal data - filtering, logging, crypting"""
 import re
 from typing import List
 import logging
@@ -30,8 +31,7 @@ class RedactingFormatter(logging.Formatter):
     def format(self, record: logging.LogRecord) -> str:
         """ filter values in incoming log records"""
         logging.basicConfig(format=self.FORMAT, level=record.levelname)
-        log = logging.getLogger(record.name)
-        log.info(filter_datum(self.fields,
+        logger = logging.getLogger(record.name)
+        logger.info(filter_datum(self.fields,
                                  self.REDACTION,
-                                 record.msg,
-                                 self.SEPARATOR))
+                                 record.msg, self.SEPARATOR))
