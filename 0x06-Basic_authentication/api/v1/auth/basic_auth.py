@@ -3,6 +3,7 @@
 from flask import request
 from typing import List, TypeVar
 from api.v1.auth.auth import Auth
+from models.user import User
 import base64
 
 
@@ -57,4 +58,12 @@ class BasicAuth(Auth):
             return None
         if user_pwd is None or\
            type(user_pwd) is not str:
+            return None
+        users = User.search({"email": user_email})
+        if not users:
+            return None
+        else:
+            for user in users:
+                if user.is_valid_password(user_pwd):
+                    return user
             return None
