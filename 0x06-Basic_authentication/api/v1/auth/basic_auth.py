@@ -43,8 +43,14 @@ class BasicAuth(Auth):
            type(decoded_base64_authorization_header) is not str:
             return (None, None)
         extract = decoded_base64_authorization_header.split(':')
+        email = extract[0]
+        if len(extract) > 2:
+            pwd = ':'.join(extract[1:])
+        else:
+            pwd = extract[1]
+        print(pwd)
         try:
-            return (extract[0], extract[1]) if extract else (None, None)
+            return (email, pwd) if extract else (None, None)
         except Exception:
             return (None, None)
 
