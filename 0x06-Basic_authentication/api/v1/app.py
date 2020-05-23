@@ -16,9 +16,6 @@ auth = None
 if os.getenv('AUTH_TYPE') == 'auth':
     from api.v1.auth.auth import Auth
     auth = Auth()
-elif os.getenv('AUTH_TYPE') == 'basic_auth':
-    from api.v1.auth.basic_auth import BasicAuth
-    auth = BasicAuth()
 
 
 @app.errorhandler(404)
@@ -44,6 +41,8 @@ def forbidden(error) -> str:
 
 @app.before_request
 def before_request() -> None:
+    """ Before request
+    """
     paths = ['/api/v1/status/', '/api/v1/unauthorized/',
              '/api/v1/forbidden/']
     if auth is None:
