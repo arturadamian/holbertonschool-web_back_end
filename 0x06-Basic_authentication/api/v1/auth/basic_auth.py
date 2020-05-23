@@ -74,9 +74,9 @@ class BasicAuth(Auth):
         """
         try:
             header = self.authorization_header(request)
-            base64_header = self.extract_base64_authorization_header(header)
-            decode_header = self.decode_base64_authorization_header(base64_header)
-            email, pwd = self.extract_user_credentials(decode_header)
-            return self.user_object_from_credentials(email, pwd)
+            base64_h = self.extract_base64_authorization_header(header)
+            decode_h = self.decode_base64_authorization_header(base64_h)
+            credents = self.extract_user_credentials(decode_h)
+            return self.user_object_from_credentials(credents[0], credents[1])
         except Exception:
             return None
