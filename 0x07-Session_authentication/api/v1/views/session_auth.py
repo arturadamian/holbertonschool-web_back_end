@@ -11,7 +11,7 @@ import os
 def login() -> str:
     """ POST /auth_session/login
     Return:
-      - list of all User objects JSON represented
+      - json string
     """
     u_email = request.form.get('email')
     if not u_email:
@@ -31,3 +31,4 @@ def login() -> str:
             return user_json
         else:
             return jsonify({"error": "wrong password"}), 401
+    return jsonify(error="no user found for this email"), 404
