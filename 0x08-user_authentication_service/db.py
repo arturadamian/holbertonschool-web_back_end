@@ -14,13 +14,15 @@ class DB:
         Creates engine, session, adds user object to DB
     """
     def __init__(self):
-        self._engine = create_engine("sqlite:///a.db")
+        """Create engine"""
+        self._engine = create_engine('sqlite:///a.db')
         Base.metadata.drop_all(self._engine)
         Base.metadata.create_all(self._engine)
         self.__session = None
 
     @property
     def _session(self):
+        """Create session"""
         if self.__session is None:
             DBSession = sessionmaker(bind=self._engine)
             self.__session = DBSession()
