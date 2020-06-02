@@ -34,3 +34,9 @@ class DB:
         self._session.add(u)
         self._session.commit()
         return u
+
+    def find_user_by(self, **kwargs: dict) -> TypeVar('User'):
+        """ returns the first row found in the users table
+            as filtered by the method’s input arguments
+        """
+        return self._session.query(User).filter_by(**kwargs).one()
