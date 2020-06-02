@@ -12,6 +12,9 @@ from user import Base, User
 class DB:
     """ Database class
         Creates engine, session, adds user object to DB
+        Methods:
+            add_user - save the user object to the database
+            find_user_by - returns the first row found in the users table
     """
     def __init__(self):
         """Create engine"""
