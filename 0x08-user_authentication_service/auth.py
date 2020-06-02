@@ -4,7 +4,7 @@ import bcrypt
 from typing import ByteString
 
 
-def _hash_password(password: str) -> bytes:
+def _hash_password(password: str) -> str:
     """ method that takes in a password
         string arguments and returns a string
     """
