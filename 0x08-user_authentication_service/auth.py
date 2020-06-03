@@ -24,8 +24,8 @@ class Auth:
             save the user to the database using self._db
             return the User object
         """
-        user = DB.find_user_by(self, email=email)
+        user = self._db.find_user_by(email=email)
         if user:
             raise ValueError('User {email} already exists')
         pd = _hash_password(password)
-        self._db.add_user(email, pd)
+        return self._db.add_user(email, pd)
