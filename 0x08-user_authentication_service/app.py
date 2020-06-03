@@ -20,9 +20,9 @@ def users() -> str:
     password = request.form('password')
     try:
         AUTH.register_user(email, password)
-        return jsonify({{"email": {email}, "message": "user created"}), 200
+        return jsonify({"email": {email}, "message": "user created"}), 200
     except Exception:
-        return jsonify({"message": "email already registered"})
+        return jsonify({"message": "email already registered"}), 400
 
 
 if __name__ == "__main__":
