@@ -2,16 +2,19 @@
 """
 Route module for the API
 """
-from flask import Flask, jsonify
+from flask import Flask, jsonify, request
 from auth import Auth
+
 
 app = Flask(__name__)
 AUTH = Auth()
+
 
 @app.route('/', methods=['GET'], strict_slashes=False)
 def hello() -> str:
     """welcome msg"""
     return jsonify({"message": "Bienvenue"}), 200
+
 
 @app.route('/users', methods=['POST'], strict_slashes=False)
 def users() -> str:
