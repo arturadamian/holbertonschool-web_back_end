@@ -26,18 +26,18 @@ class DB:
 
     @property
     def _session(self):
-        """Create session"""
+        """ Create session """
         if self.__session is None:
             DBSession = sessionmaker(bind=self._engine)
             self.__session = DBSession()
         return self.__session
 
-    def add_user(self, email: str, hashed_password: str) -> object:
-        """save the user to the database"""
-        u = User(email=email, hashed_password=hashed_password)
-        self._session.add(u)
+    def add_user(self, email: str, hashed_password: str) -> TypeVar('User'):
+        """ Add a user instance to the session DB """
+        user = User(email=email, hashed_password=hashed_password)
+        self._session.add(user)
         self._session.commit()
-        return u
+        return user
 
     def find_user_by(self, **kwargs: dict) -> object:
         """ returns the first row found in the users table
