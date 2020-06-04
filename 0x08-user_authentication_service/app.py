@@ -16,9 +16,11 @@ def hello() -> str:
     return jsonify({"message": "Bienvenue"})
 
 
-@app_views.route('/users', methods=['POST'], strict_slashes=False)
+@app.route('/users', methods=['POST'], strict_slashes=False)
 def users() -> str:
-    """registering the user"""
+    """ Registering the user
+        Return: message, HTTP code
+    """
     email = request.form.get('email')
     # print(email)
     password = request.form.get('password')
@@ -31,7 +33,7 @@ def users() -> str:
 
 
 @app.route('/sessions', methods=['POST'], strict_slashes=False)
-def login():
+def login() -> str:
     """respond to the POST /sessions route"""
     email = request.form.get('email')
     password = request.form.get('password')
@@ -41,6 +43,17 @@ def login():
     response = jsonify({'email': {email}, 'message': 'logged in'})
     response.set_cookie('session_id', session_id)
     return response
+
+
+@app.route('/sessions', methods=['DELETE'], strict_slashes=False)
+def logout() -> str:
+    """response to the DELETE /sessions route"""
+    session_id = request.cookies.get('session_id')
+    user = AUTH.get_user_from_session_id(session_id)
+    if not user:
+        abort(403)
+    AUTH.destroy_session(user.id)
+    return hello()
 
 
 if __name__ == "__main__":
