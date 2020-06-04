@@ -19,15 +19,15 @@ class DB:
             find_user_by - returns the first row found in the users table
     """
     def __init__(self):
-        """Create engine"""
-        self._engine = create_engine('sqlite:///a.db')
+        """ constructor"""
+        self._engine = create_engine("sqlite:///a.db")
         Base.metadata.drop_all(self._engine)
         Base.metadata.create_all(self._engine)
         self.__session = None
 
     @property
     def _session(self):
-        """ Create session """
+        """create session """
         if self.__session is None:
             DBSession = sessionmaker(bind=self._engine)
             self.__session = DBSession()
