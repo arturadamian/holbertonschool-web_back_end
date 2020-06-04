@@ -3,6 +3,7 @@
 import bcrypt
 from db import DB
 from typing import TypeVar
+import uuid
 
 
 def _hash_password(password: str) -> str:
@@ -39,3 +40,9 @@ class Auth:
         if user:
             pd = _hash_password(password)
             return bcrypt.checkpw(password.encode('utf-8'), pd)
+
+    def _generate_uuid(self) -> str:
+        """
+        return a string representation of a new UUID
+        """
+        return str(uuid.uuid4)
