@@ -6,18 +6,18 @@ from typing import TypeVar
 import uuid
 
 
-def _hash_password(password: str) -> str:
-    """ method that takes in a password
-        string arguments and returns a string
+def _generate_uuid() -> str:
     """
-    return bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
+    generate random id
+    """
+    return str(uuid.uuid4())
 
 
 def _generate_uuid() -> str:
-        """
-        return a string representation of a new UUID
-        """
-        return str(uuid.uuid4())
+    """
+    return a string representation of a new UUID
+    """
+    return str(uuid.uuid4())
 
 
 class Auth:
