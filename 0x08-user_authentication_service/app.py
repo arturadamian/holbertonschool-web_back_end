@@ -30,7 +30,7 @@ def users() -> str:
         return jsonify({"message": "email already registered"}), 400
 
 
-@app_views.route('/sessions', methods=['POST'], strict_slashes=False)
+@app.route('/sessions', methods=['POST'], strict_slashes=False)
 def login():
     """respond to the POST /sessions route"""
     email = request.form.get('email')
