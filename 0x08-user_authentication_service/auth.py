@@ -6,11 +6,11 @@ from typing import TypeVar
 import uuid
 
 
-def _generate_uuid() -> str:
+def _hash_password(password: str) -> str:
+    """ method that takes in a password
+        string arguments and returns a string
     """
-    generate random id
-    """
-    return str(uuid.uuid4())
+    return bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
 
 
 def _generate_uuid() -> str:
@@ -47,3 +47,11 @@ class Auth:
         if user:
             pd = _hash_password(password)
             return bcrypt.checkpw(password.encode('utf-8'), pd)
+
+    def create_session(self, email: str) -> str:
+        """returns the session ID as a string."""
+        user = self._db.find_user_by(email=email)
+        if user:
+            session_id = _generate_uuid()
+            self._db.update_user(user.id, session_id=session_id)
+            return session_id
