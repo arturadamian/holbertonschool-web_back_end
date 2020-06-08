@@ -48,7 +48,10 @@ class TestMemoize(unittest.TestCase):
     def test_memoize(self):
         """ testing memoize decorator"""
         class TestClass:
-            """test class """
+            """ Test Class
+                Methods:
+                    a_method, a_property
+            """
 
             def a_method(self):
                 """ a_method"""
