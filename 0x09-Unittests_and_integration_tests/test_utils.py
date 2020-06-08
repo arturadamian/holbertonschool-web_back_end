@@ -59,7 +59,7 @@ class TestMemoize(unittest.TestCase):
                 return self.a_method()
 
         with patch('utils.memoize', return_value=42) as mock_method:
-            mock_method.a_property()pp
+            mock_method.a_property()
             mock_method.a_property()
         mock_method.assert_called_once
 
