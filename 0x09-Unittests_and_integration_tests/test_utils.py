@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """ python basic unittest """
 import unittest
-from utils import access_nested_map, get_json
+from utils import access_nested_map, get_json, memoize
 from parameterized import parameterized
 from unittest.mock import patch, Mock
 
@@ -56,10 +56,9 @@ class TestMemoize(unittest.TestCase):
             def a_property(self):
                 return self.a_method()
 
-        with patch('TestClass.a_method', return_value=42) as mock_method:
-            x = TestClass()
-            x.a_property()
-            x.a_property()
+        with patch('utils.memoize', return_value=42) as mock_method:
+            mock_method.a_property()
+            mock_method.a_property()
         mock_method.assert_called_once
 
 
