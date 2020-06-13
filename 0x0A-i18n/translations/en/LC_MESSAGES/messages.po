@@ -18,18 +18,22 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.8.0\n"
 
-# eng title
+#
 msgid "home_title"
 msgstr "Welcome to Holberton"
 
-# eng header
+#
 msgid "home_header"
 msgstr "Hello world!"
 
-# 5-app.py 50
+#
 msgid "logged_in_as"
 msgstr "You are logged in as %(username)s."
 
-# eng header
+#
 msgid "not_logged_in"
 msgstr "You are not logged in."
+
+#
+msgid "current_time_is"
+msgstr "The current time is %(current_time)s."
