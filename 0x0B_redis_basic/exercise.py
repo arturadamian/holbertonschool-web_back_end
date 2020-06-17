@@ -32,7 +32,7 @@ def call_history(method: Callable) -> Callable:
     return wrapper
 
 
-def replay(method: Callable) -> None:
+def replay(method: Callable):
     """prints the data"""
     key = method.__qualname__
     inputs = key + ":inputs"
