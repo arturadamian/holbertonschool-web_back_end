@@ -1,6 +1,5 @@
-#!/uisr/bin/env python3
+#!/usr/bin/env python3
 """pumongo aggregate"""
-
 
 def top_students(mongo_collection):
     """returns all students sorted by average score"""
