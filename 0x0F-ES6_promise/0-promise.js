@@ -1,1 +1,1 @@
-let getResponseFromAPI = () => new Promise(() => {});
+const getResponseFromAPI = () => new Promise((resolve, reject) => {});
