@@ -1,4 +1,3 @@
 export default function setFromArray(array) {
-  let mySet = new Set();
-  return mySet.add(array);
+  return new Set(array);
 }
