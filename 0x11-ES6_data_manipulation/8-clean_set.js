@@ -1,5 +1,6 @@
 export default function cleanSet(set, startString) {
   let resultString = '';
+  if (!startString || !startString.length) return resultString;
   set.forEach((el) => {
     if (el.startsWith(startString)) resultString += `${el.slice(startString.length)}-`;
   });
