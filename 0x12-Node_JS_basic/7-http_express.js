@@ -15,7 +15,7 @@ app.get('/students', ((req, res) => {
       res.end();
     })
     .catch((err) => { throw err; });
-}),);
+}));
 app.listen(1245);
 
 module.exports = app;
