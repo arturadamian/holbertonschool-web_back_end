@@ -1,6 +1,8 @@
+const fs = require('fs');
+
 const countStudents = (path) => {
   try {
-    let data = readFileSync(path, 'utf8').toString().split('\n');
+    let data = fs.readFileSync(path, 'utf8').toString().split('\n');
     data = data.slice(1, data.length - 1);
     console.log(`Number of students: ${data.length}`);
     const arrayOfClasses = {};
@@ -10,7 +12,7 @@ const countStudents = (path) => {
       arrayOfClasses[student[3]].push(student[0]);
     }
     for (const cls in arrayOfClasses) {
-      console.log(`Number of students in ${cls}: ${arrayOfClasses[cls].length}. List: ${arrayOfClasses[cls].join(', ')}`);
+      if (cls) console.log(`Number of students in ${cls}: ${arrayOfClasses[cls].length}. List: ${arrayOfClasses[cls].join(', ')}`);
     }
   } catch (err) {
     throw new Error('Cannot load the database');
