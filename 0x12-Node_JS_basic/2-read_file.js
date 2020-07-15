@@ -13,7 +13,9 @@ const countStudents = (path) => {
     for (const cls in arrayOfClasses) {
       console.log(`Number of students in ${cls}: ${arrayOfClasses[cls].length}. List: ${arrayOfClasses[cls].join(', ')}`);
     }
-  } catch { throw new Error('Cannot load the database'); }
+  } catch (err) {
+      throw new Error('Cannot load the database');
+  }
 }
 
 module.exports = countStudents;
