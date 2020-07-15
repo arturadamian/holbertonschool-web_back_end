@@ -8,4 +8,6 @@ process.stdin.on('readable', () => {
   showName(name);
 });
 
-if (process.stdout.isTTY) process.stdout.write('This important software is now closing\n');
+process.stdin.on('end', () => {
+  if (process.stdout.isTTY) process.stdout.write('This important software is now closing\n');
+});
