@@ -1,3 +1,3 @@
-const displayMessage = (welcome) => process.stdout.write(welcome);
+const displayMessage = (welcome) => console.log(welcome);
 
 module.exports = displayMessage;
