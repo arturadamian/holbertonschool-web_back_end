@@ -1,7 +1,7 @@
 const readDatabase = require('../utils');
 
 class StudentsController {
- static getAllStudents(request, response) {
+ static getAllStudents(req, res) {
     readDatabase('database.csv')
       .then((arrayOfClasses) => {
         res.status(200);
