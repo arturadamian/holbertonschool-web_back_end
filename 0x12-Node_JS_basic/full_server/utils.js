@@ -16,7 +16,7 @@ const readDatabase = (path) => {
           arrayOfClasses[student[3]].push(student[0]);
         }
         for (const cls in arrayOfClasses) {
-            if (cls && cls !== 'count') console.log(`Number of students in ${cls}: ${arrayOfClasses[cls].length}. List: ${arrayOfClasses[cls].join(', ')}\n`);
+          if (cls && cls !== 'count') console.log(`Number of students in ${cls}: ${arrayOfClasses[cls].length}. List: ${arrayOfClasses[cls].join(', ')}\n`);
         }
         res(arrayOfClasses);
       }
