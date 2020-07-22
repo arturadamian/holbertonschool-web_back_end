@@ -1,5 +1,6 @@
 const chai = require('chai');
 const chaiHttp = require('chai-http');
+const expect = chai.expect;
 
 chai.use(chaiHttp);
 
@@ -9,8 +10,8 @@ describe('GET /', () => {
       .get('/')
       .end((err, res) => {
         if (err) throw err;
-        chai.expect(res.statusCode).to.eql(200);
-        chai.expect(res.text).to.eql('Welcome to the payment system');
+        expect(res.statusCode).to.eql(200);
+        expect(res.text).to.eql('Welcome to the payment system');
       })
   })
 })
@@ -20,8 +21,8 @@ describe('GET /cart/:id', () => {
       .get('/cart/12')
       .end((err, res) => {
         if (err) throw err;
-        chai.expect(res.statusCode).to.eql(200);
-        chai.expect(res.text).to.equal('Payment methods for cart 12');
+        expect(res.statusCode).to.eql(200);
+        expect(res.text).to.equal('Payment methods for cart 12');
       });
   })
   it('correct status if id isNaN', () => {
@@ -29,7 +30,7 @@ describe('GET /cart/:id', () => {
       .get('/cart/twelve')
       .end((err, res) => {
         if (err) throw err;
-        chai.expect(res.statusCode).to.equal(404);
+        expect(res.statusCode).to.equal(404);
       });
   })
 })
