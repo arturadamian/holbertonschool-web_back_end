@@ -9,8 +9,8 @@ describe('express app GET / req', () => {
       .get('/')
       .end((err, res) => {
         if (err) throw err;
-        chai.expect(res.statusCode).to.eql(200);
-        chai.expect(res.text).to.eql('Welcome to the payment system');
+        chai.expect(res.statusCode).to.equal(200);
+        chai.expect(res.text).to.equal('Welcome to the payment system');
       })
   })
 })

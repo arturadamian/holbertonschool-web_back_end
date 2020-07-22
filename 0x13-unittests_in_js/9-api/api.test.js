@@ -9,8 +9,8 @@ describe('GET /', () => {
       .get('/')
       .end((err, res) => {
         if (err) throw err;
-        chai.expect(res.statusCode).to.eql(200);
-        chai.expect(res.text).to.eql('Welcome to the payment system');
+        chai.expect(res.statusCode).to.equal(200);
+        chai.expect(res.text).to.equal('Welcome to the payment system');
       })
   })
 })
@@ -20,8 +20,8 @@ describe('GET /cart/:id', () => {
       .get('/cart/12')
       .end((err, res) => {
         if (err) throw err;
-        chai.expect(res.statusCode).to.eql(200);
-        chai.expect(res.text).to.eql('Payment methods for cart 12');
+        chai.expect(res.statusCode).to.equal(200);
+        chai.expect(res.text).to.equal('Payment methods for cart 12');
       });
   })
   it('correct status if id isNaN', () => {
@@ -29,7 +29,7 @@ describe('GET /cart/:id', () => {
       .get('/cart/twelve')
       .end((err, res) => {
         if (err) throw err;
-        chai.expect(res.statusCode).to.eql(404);
+        chai.expect(res.statusCode).to.equal(404);
       });
   })
 })
