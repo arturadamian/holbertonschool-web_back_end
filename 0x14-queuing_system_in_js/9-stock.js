@@ -8,14 +8,14 @@ const clientGet = promisify(client.get).bind(client);
 const clientSet = promisify(client.set).bind(client);
 
 const listProducts = [
-  { Id: 1, name: 'Suitcase 250', price: 50, stock: 4 },
+  { Id: 1, name: 'Suitcase 250', price: 50, stock: 0 },
   { Id: 2, name: 'Suitcase 450', price: 100, stock: 10 },
   { Id: 3, name: 'Suitcase 650', price: 350, stock: 2 },
-  { Id: 4, name: 'Suitcase 1050', price: 550, stock: 5 }
+  { Id: 4, name: 'Suitcase 1050', price: 550, stock: 15 }
 ]
 const getItemById = (id) => {
   for (const list of listProducts) {
-    if (list['Id'] === id) return list;
+    if (list.Id === id) return list;
   }
 }
 
@@ -24,33 +24,38 @@ const reserveStockById = async (itemId, stock) => {
 }
 
 const getCurrentReservedStockById = async (itemId) => {
-  await clientGet(itemId);
-
+  const currentReservedStock = await clientGet(itemId);
+  return currentReservedStock;
 }
 app.get('/list_products', (req, res) => res.send(JSON.stringify(listProducts)));
+
 app.get('/list_products/:itemId', async (req, res) => {
   const id = Number(req.params.itemId);
   const item = getItemById(id);
+  const currentReservedStock = await getCurrentReservedStockById(id);
+  
   if (item) {
-    item.currentQuantity = await getCurrentReservedStockById(id);
-    res.send(JSON.stringify(item));
+    item.reservedStock = (currentReservedStock) ? currentReservedStock : 0;
+    res.json(item);
+    return;
   }
-  res.status(404).send(JSON.stringify({"status":"Product not found"}));
+  res.status(404).json({"status":"Product not found"});
 });
 
 app.get('/reserve_product/:itemId', async (req, res) => {
-    const id = Number(req.params.itemId);
-    const item = getItemById(id);
-    if (!item) {
-        res.status(403).send(JSON.stringify({"status":"Product not found"}));
-    }
-    const stock = await getCurrentReservedStockById(id);
-    console.log(stock);
-    if (stock === 0) {
-      res.status(403).send(JSON.stringify({"status":"Not enough stock available","itemId":`${id}`}));
-    }
-    console.log(stock);
-    async () => await reserveStockById(id, stock);
-    res.send(JSON.stringify({"status":"Reservation confirmed","itemId":`${id}`}));
+  const id = Number(req.params.itemId);
+  const item = getItemById(id);
+  if (!item) {
+      res.status(403).json({"status":"Product not found"});
+  }
+  const currentReservedStock = await getCurrentReservedStockById(id);
+  item.reservedStock = (currentReservedStock) ? currentReservedStock : 0;
+  if ((item.stock - item.reservedStock) < 1) {
+    res.status(403).json({ status: 'Not enough stock available', id });
+    return;
+  }
+  reserveStockById(id, Number(currentReservedStock) + 1);
+  res.json({ status: 'Reservation confirmed', id });
 });
+
 app.listen(1245);
